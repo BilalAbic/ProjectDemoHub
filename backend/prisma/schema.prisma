@@ -146,12 +146,14 @@ enum ActionType {
 // ============================================
 
 model Admin {
-  id           String   @id @default(uuid())
-  email        String   @unique @db.VarChar(255)
-  passwordHash String   @map("password_hash") @db.VarChar(255)
-  name         String   @db.VarChar(100)
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id           String    @id @default(uuid())
+  email        String    @unique @db.VarChar(255)
+  password     String    @db.VarChar(255)
+  name         String    @db.VarChar(100)
+  role         String    @default("admin") @db.VarChar(50)
+  lastLogin    DateTime? @map("last_login")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
 
   @@map("admins")
 }

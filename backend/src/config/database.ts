@@ -22,5 +22,7 @@ export const disconnectDatabase = async () => {
   console.log('🔌 Database disconnected');
 };
 
+// Export prisma instance (both named and default)
+export { prisma };
 export default prisma;
 

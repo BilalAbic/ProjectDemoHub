@@ -14,8 +14,9 @@ async function main() {
     update: {},
     create: {
       email: process.env.ADMIN_EMAIL || 'admin@demohub.com',
-      passwordHash: adminPassword,
+      password: adminPassword,
       name: 'Bilal Abic',
+      role: 'admin',
     },
   });
 

@@ -3,8 +3,12 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { errorHandler } from '@/middlewares/errorHandler';
 import { notFoundHandler } from '@/middlewares/notFoundHandler';
+import projectRoutes from '@/routes/projectRoutes';
+import technologyRoutes from '@/routes/technologyRoutes';
+import authRoutes from '@/routes/authRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +38,9 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Cookie parsing
+app.use(cookieParser());
+
 // HTTP request logging
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
@@ -51,9 +58,12 @@ app.get('/health', (_req, res) => {
   });
 });
 
-// API Routes (will be added in next phase)
-// app.use('/api/projects', projectRoutes);
-// app.use('/api/admin', adminRoutes);
+// Public API Routes
+app.use('/api/projects', projectRoutes);
+app.use('/api/technologies', technologyRoutes);
+
+// Admin API Routes (Authentication)
+app.use('/api/admin', authRoutes);
 
 // ============================================
 // ERROR HANDLING
