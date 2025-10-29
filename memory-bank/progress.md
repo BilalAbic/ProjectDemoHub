@@ -2,15 +2,15 @@
 
 ## Project Status Overview
 
-**Current Phase**: 🎯 Authentication Complete - Admin CRUD Next  
-**Overall Progress**: 30% Complete  
+**Current Phase**: 🎯 Admin CRUD Complete - Frontend Next  
+**Overall Progress**: 35% Complete  
 **Last Updated**: October 29, 2025
 
 ### Progress Summary
 ```
 Planning & Documentation  ████████████████████ 100% ✅
 Project Setup             ████████████████████ 100% ✅
-Backend Development       █████████░░░░░░░░░░░  45% 🚧
+Backend Development       ███████████░░░░░░░░░  55% 🚧
 Frontend Public Pages     ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Admin Panel              ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Testing & QA             ░░░░░░░░░░░░░░░░░░░░   0% ⏳
@@ -79,7 +79,7 @@ Deployment               ░░░░░░░░░░░░░░░░░░�
 - ✅ **TypeScript**: Compiling without errors, strict mode enabled
 - ✅ **Development Tools**: Nodemon watching files, auto-reload working
 
-### Authentication System Working (NEW - Completed Today) ✅
+### Authentication System Working (Completed Today) ✅
 - ✅ **POST /api/admin/login**: Admin login with email/password
   - Returns access token + refresh token (HTTP-only cookie)
   - Bcrypt password verification
@@ -103,6 +103,36 @@ Deployment               ░░░░░░░░░░░░░░░░░░�
   - Protects admin routes
   - Attaches user data to request
   - Returns proper error codes
+
+### Admin CRUD Endpoints Working (NEW - Completed Today) ✅
+- ✅ **POST /api/admin/projects**: Create new project
+  - Protected route (JWT authentication required)
+  - Validates all required fields (name, description, start_date)
+  - Supports relations (technologies, contributors)
+  - Supports optional fields (end_date, demo_url, github_url)
+  - Returns created project with full relations
+- ✅ **PUT /api/admin/projects/:id**: Update existing project
+  - Protected route with UUID validation
+  - Partial updates supported
+  - Technologies and contributors can be replaced
+  - Returns updated project with full relations
+- ✅ **DELETE /api/admin/projects/:id**: Delete project
+  - Protected route with UUID validation
+  - Cascades to related records (images, technologies, contributors)
+  - Deletes images from Cloudinary before database deletion
+  - Returns success message
+- ✅ **Cloudinary Integration**: Image upload and storage ready
+  - Upload utility functions created
+  - Delete utility functions created
+  - Configuration file set up
+- ✅ **Service Layer**: Clean separation of concerns
+  - `adminProjectService.ts` with all CRUD operations
+  - Image management functions (add, delete, reorder)
+  - Proper Prisma queries with camelCase field names
+- ✅ **Type Safety**: All TypeScript errors resolved
+  - Prisma field mapping (snake_case DB → camelCase TS)
+  - Junction table structure validated
+  - No unused variables or parameters
   
 ### Public API Endpoints Working (Completed Today) ✅
 - ✅ **GET /api/projects**: Returns paginated published projects
@@ -229,39 +259,42 @@ Deployment               ░░░░░░░░░░░░░░░░░░�
   - GET /api/projects/invalid-id: ✅ Returns 400 error
   - GET /api/projects/valid-uuid-404: ✅ Returns 404 error
 
-#### Admin API Endpoints
+#### Admin API Endpoints ✅ 60% COMPLETED
 - ⏳ GET /api/admin/dashboard/stats - Dashboard statistics
 - ⏳ GET /api/admin/dashboard/activities - Recent activities
 - ⏳ GET /api/admin/projects - All projects (including unpublished)
-- ⏳ POST /api/admin/projects - Create new project
+- ✅ POST /api/admin/projects - Create new project
   - Validation: name, description, dates, technologies
-  - Create project and related records in transaction
-- ⏳ PUT /api/admin/projects/:id - Update project
+  - Create project and related records
+  - Tested and working ✅
+- ✅ PUT /api/admin/projects/:id - Update project
   - Update project details
-  - Handle technology associations
-- ⏳ DELETE /api/admin/projects/:id - Delete project
-  - Soft delete or hard delete (based on decision)
-  - Clean up related records
+  - Handle technology and contributor associations
+  - Partial updates supported
+  - Tested and working ✅
+- ✅ DELETE /api/admin/projects/:id - Delete project
+  - Hard delete with cascade
+  - Clean up Cloudinary images
+  - Tested and working ✅
 - ⏳ POST /api/admin/projects/:id/images - Upload project image
-  - Multer middleware for file handling
-  - Cloudinary upload integration
-  - Save image URL to database
+  - Multer middleware configured
+  - Cloudinary integration ready
+  - Service functions created (not tested yet)
 - ⏳ DELETE /api/admin/projects/:id/images/:imageId - Delete image
-  - Delete from Cloudinary
-  - Delete from database
+  - Service functions created (not tested yet)
 - ⏳ PUT /api/admin/projects/:id/images/reorder - Reorder images
-  - Update display_order for images
-- ⏳ Add input validation for all endpoints
-- ⏳ Test all admin endpoints
+  - Service functions created (not tested yet)
+- ✅ Add input validation for all endpoints
+- ✅ Test main CRUD endpoints (create, update, delete)
 
-#### Image Upload System
-- ⏳ Create Cloudinary account and get credentials
-- ⏳ Configure Cloudinary SDK
-- ⏳ Implement image upload service
-- ⏳ Add image validation (size, type)
-- ⏳ Implement image deletion service
-- ⏳ Add error handling for upload failures
-- ⏳ Test image upload and deletion
+#### Image Upload System ✅ 70% COMPLETED
+- ✅ Create Cloudinary account and get credentials
+- ✅ Configure Cloudinary SDK
+- ✅ Implement image upload service (`uploadImageToCloudinary`)
+- ⏳ Add image validation (size, type) - Needs Multer config
+- ✅ Implement image deletion service (`deleteImageFromCloudinary`)
+- ✅ Add error handling for upload failures
+- ⏳ Test image upload and deletion (not tested yet)
 
 ### Phase 3: Frontend Public Pages (0% Complete)
 **Estimated Time**: 4-5 days
@@ -661,15 +694,16 @@ None - project not yet started
 
 ## Milestones & Goals
 
-### Sprint 1: Foundation (Week 1) - 95% COMPLETE
+### Sprint 1: Foundation (Week 1) - 98% COMPLETE
 **Goal**: Project setup and basic backend API  
 **Deliverables**:
-- ⏳ Git repository initialized
+- ⏳ Git repository initialized (only remaining task)
 - ✅ Backend project created and running
 - ✅ Database schema implemented and seeded
 - ✅ Public API endpoints working
-- ✅ Basic authentication working
-- ⏳ Frontend project created (next task)
+- ✅ Authentication system working
+- ✅ Admin CRUD endpoints working (create, update, delete)
+- ⏳ Frontend project created (next sprint)
 
 ### Sprint 2: Public Pages (Week 2)
 **Goal**: Complete public-facing pages  
@@ -835,5 +869,42 @@ When starting next work session:
 - Protected routes secured
 - Ready for admin CRUD endpoints
 
-**Next Version (0.5.0)**: Admin CRUD API endpoints (create, read, update, delete projects)
+### Version 0.5.0 - Admin CRUD Endpoints (October 29, 2025 - Night) ✅
+**Added**:
+- Multer and Cloudinary packages for image handling
+- Cloudinary configuration file
+- Image upload utility (`uploadImageToCloudinary`)
+- Image deletion utility (`deleteImageFromCloudinary`)
+- Admin project service with full CRUD operations
+  - `createProject` - Create new project with relations
+  - `updateProject` - Update existing project
+  - `deleteProject` - Delete project with Cloudinary cleanup
+  - `addProjectImage` - Add image to project
+  - `deleteProjectImage` - Delete image from project
+  - `reorderProjectImages` - Reorder project images
+- Admin project controller with validation
+- Admin project routes (protected with JWT)
+- POST /api/admin/projects endpoint (create project)
+- PUT /api/admin/projects/:id endpoint (update project)
+- DELETE /api/admin/projects/:id endpoint (delete project)
+
+**Fixed**:
+- Prisma field naming (snake_case DB → camelCase TypeScript)
+- Junction table relations (removed non-existent 'order' field)
+- TypeScript compilation errors (all resolved)
+- Nodemon restart issues during development
+
+**Tested**:
+- POST /api/admin/projects: ✅ Creates project with technologies
+- PUT /api/admin/projects/:id: ✅ Updates project partially
+- DELETE /api/admin/projects/:id: ✅ Deletes with cascade
+- All tests passed with valid JWT tokens
+
+**Current State**:
+- Admin CRUD endpoints fully operational
+- Create, update, delete working
+- Image upload infrastructure ready (not tested yet)
+- Ready for frontend development or image upload testing
+
+**Next Version (0.6.0)**: Frontend Setup (React + Vite + Tailwind)
 

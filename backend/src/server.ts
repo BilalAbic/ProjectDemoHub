@@ -9,6 +9,7 @@ import { notFoundHandler } from '@/middlewares/notFoundHandler';
 import projectRoutes from '@/routes/projectRoutes';
 import technologyRoutes from '@/routes/technologyRoutes';
 import authRoutes from '@/routes/authRoutes';
+import adminProjectRoutes from '@/routes/adminProjectRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -62,8 +63,9 @@ app.get('/health', (_req, res) => {
 app.use('/api/projects', projectRoutes);
 app.use('/api/technologies', technologyRoutes);
 
-// Admin API Routes (Authentication)
+// Admin API Routes
 app.use('/api/admin', authRoutes);
+app.use('/api/admin/projects', adminProjectRoutes);
 
 // ============================================
 // ERROR HANDLING
