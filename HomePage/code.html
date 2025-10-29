@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bilal Abic - Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#06f9f9",
+              "background-light": "#f5f8f8",
+              "background-dark": "#0f2323",
+              "surface-dark": "#1a1a1a",
+              "surface-light": "#ffffff",
+              "text-light-heading": "#1a1a1a",
+              "text-light-body": "#555555",
+              "text-dark-heading": "#EAEAEA",
+              "text-dark-body": "#B0B0B0"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            keyframes: {
+                typing: {
+                  '0%': { width: '0' },
+                  '100%': { width: '100%' },
+                },
+                blink: {
+                  '50%': { borderColor: 'transparent' },
+                }
+            },
+            animation: {
+                typing: 'typing 3.5s steps(40, end) infinite, blink .75s step-end infinite',
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light-body dark:text-text-dark-body">
+<div class="flex flex-col min-h-screen">
+<nav class="sticky top-0 bg-background-dark/80 backdrop-blur-lg border-b border-white/10 z-10">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex items-center justify-between h-20">
+<a class="text-text-dark-heading text-xl font-bold font-mono tracking-tighter" href="#">BilalAbic/DemoHub</a>
+<div class="hidden md:flex items-center space-x-2">
+<button class="px-4 py-2 text-sm font-medium text-text-dark-heading bg-primary/20 rounded-md">All</button>
+<button class="px-4 py-2 text-sm font-medium text-text-dark-body hover:text-text-dark-heading transition-colors">React</button>
+<button class="px-4 py-2 text-sm font-medium text-text-dark-body hover:text-text-dark-heading transition-colors">Node.js</button>
+<button class="px-4 py-2 text-sm font-medium text-text-dark-body hover:text-text-dark-heading transition-colors">Python</button>
+<button class="px-4 py-2 text-sm font-medium text-text-dark-body hover:text-text-dark-heading transition-colors">Vue.js</button>
+</div>
+<div class="flex items-center">
+<button class="md:hidden p-2 text-text-dark-body hover:text-text-dark-heading transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="w-full p-8 flex-grow">
+<div class="max-w-7xl mx-auto">
+<header class="mb-8">
+<h1 class="text-text-light-heading dark:text-text-dark-heading text-4xl font-black tracking-tight">Projects</h1>
+<p class="text-text-light-body dark:text-text-dark-body mt-1">A curated collection of my latest work and experiments.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="Abstract gradient representing Project Nova" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABPtHntrvVPB0iZAS-B8UViZMq5h7WRCGaWVy_YExW3l2aHdVW5DsbJ_Ah1UK0f3izn8U0ZvI3ns66DzXWLW6ssn1giqRUBKbYiC7B9G8974rgvZ_MlCZ9qNDVbcA_iiieWMiHQ1FntgyHs_lqdmdRjuYDO3NgixZKca_YOkQEls0g1PCNRHaxkO0-IbJwhJDPeZlMchAocxtPKU6Dcg10T-cUmHApf9VAF415DPzp5o83jNKE5-qm-aER6FlZG3Xa55sK012CuLDb");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">Project Nova</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">A data visualization dashboard using D3.js and React.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">React</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">D3.js</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Node.js</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="AI Chatbot interface visualization" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDu271NBPKld8l5kVjFmqOSh8oaI9zuV5f2B17tJUW4jXlHQqtAbv1V3eqbeVovYR_FJPPJhJ1AJR83vwzp3f_C15S0eyXPKBB-4DZdgM9wgB3pjL4EwEgfxBas4LaX0q6XY5vA6NiT-KRbx8eDPAfreOrX74U4ml3K45HT9W4YzbFolbdFlkIYZOdNqCN11Uel_kvxlrApbyY_ySl1TyBhgg73Jj8DDHk5fAUtyXPFD6bC44JqHId-oC62WqyZxyNG7t2vlG9lwWzM");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">AI Chatbot</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">An intelligent chatbot for customer service applications.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Python</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">TensorFlow</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Flask</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="E-commerce platform mockup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCURRhUwpBkEkXZE2Z145K7kNd9DaAjsEwPoqQZac9_SGLWOL456B6xiFjeIGOZOEGxxCK5L_kzjMYRxdUR164mIKov-15XPaRxilq6aeVtlFVv7Oap8spY0aS5l-1VHFLmmfDnC8oB90Z9KFvlBBOyPV9rcWuH-hbnUvTWjrbFqwXF0XaSCg-WRYnAjgAxyBGmcgdbLvNKZQp6p5CFQkDowAIrhtxEASwqNu2vDbrsbovJCOpz7W0-jahnXHfFddsJEJ20SzLHDqMg");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">E-commerce Platform</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">A full-featured online store with Stripe integration.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Vue.js</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Django</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">PostgreSQL</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="Mobile weather application interface" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7tTfHQQDwu_b6hCzT7Mpta-xMH_BLGDyVbm0RYGG37RI6n_tLZvdCJvyLhT-6_wNpWJFwtOYCT4OSrc3-ZQVgcRGBJOoG3ud2BjwYfL9XdvaxnqH0cHIRQGqxbKk_9CZB3KRep8lr64KAAKzwBkhngGCM3fWr5mhYi5tYg5HPvPKRAY3CsGEhV5zpO6_NVw4pxOxP0_nnloqZIEXQMs8jdgOxkN2EzpravFcEY9H9BwzPpSKOLlK5xL-ig2M-gs-u4HPLsUbdmQWd");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">Mobile Weather App</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">A clean and simple weather app for iOS and Android.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">React Native</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Expo</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">REST API</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="Portfolio website design concept" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCka8QRhq8jx_0cNTpeHglLMNCEDsC9FNOXAdB1FhY9uiWhVJ8OLNVLjCfnuxMve0d1l8E3dTBP4jCqN5gyluA7v43KIRqys8mbuCKoHrJNFAjA23Y8kjshTSn54gsWwHE29ztfLt-bXU3US-0ir5ic9b-jpOdRExfYZTwqR_1wjkYEFmtcMBZB4Yl2tKu7apilhbRSbsI7mjgDovJNsyiyua7OBQp67W-wiLWBq8w2kR5R4rEUOeony-7jfDwlmEgvxz4UQaWw8pp6");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">Portfolio Website V2</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">The second iteration of my personal portfolio site.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Next.js</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Tailwind CSS</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Framer Motion</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" data-alt="Task management tool with kanban board" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBj4oFXb9gyNFGWZrwFmljm-S583eAHdrOkebFjIeIN5bQk3hE3w3W55Akx4k_aKhRfIgWlVZ_QjLyo6psGJbpwdrScXKLsaGlCLkvf2hqRuaQSaYGsG9fABS-jm7v4pp54dRk2BDUfIH5rZTaebGzVEEhoTwkk_VWF1gMHvmTVLt79-GoKxGREPoZMl0sQEfjDUn5ojm9DlgYFsn8VaC9DNoI5W9Ny89CEOt2A7r6oOcSZM9AjoVyTh2aFSUgeHc8eIVVeKr1wVyNJ");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">Task Management Tool</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">A collaborative tool for managing team projects.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">SvelteKit</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Firebase</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">TypeScript</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuByawAnTeli4_vt9p1dklWmil6iOzwokFgqJYHgsBzYDA9JiA1pQKA20fI_IJvAWY6g5OdPokTfuxM5WkKp_rQg5L-niMhGmXVWlhWZ40GnF09yhRAhQNqmo62Y32GfEIeG_cQ__Wiqq716gy1ueri3VyGEvA57mAifKy4FFU3U4X6flhHT-VKdckfDBjG1gX93EEr0ZajzexJitTri2fNnPUzHPbAcfgKlR-dK0IXHeKk9oWhxLszemmC3coTt01oQu4fqA4up4Gby");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">Project Orion</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">A real-time data streaming and processing pipeline.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Go</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Kafka</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Docker</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-md">
+<div class="bg-cover bg-center h-48" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCURRhUwpBkEkXZE2Z145K7kNd9DaAjsEwPoqQZac9_SGLWOL456B6xiFjeIGOZOEGxxCK5L_kzjMYRxdUR164mIKov-15XPaRxilq6aeVtlFVv7Oap8spY0aS5l-1VHFLmmfDnC8oB90Z9KFvlBBOyPV9rcWuH-hbnUvTWjrbFqwXF0XaSCg-WRYnAjgAxyBGmcgdbLvNKZQp6p5CFQkDowAIrhtxEASwqNu2vDbrsbovJCOpz7W0-jahnXHfFddsJEJ20SzLHDqMg");'></div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-text-light-heading dark:text-text-dark-heading">CodeHub AI</h3>
+<p class="text-sm mt-1 text-text-light-body dark:text-text-dark-body">An AI-powered code completion and suggestion tool.</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">PyTorch</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">FastAPI</span>
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">VSCode Ext</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="bg-primary text-black font-bold py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">View Details</button>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<nav aria-label="Pagination" class="flex items-center space-x-2">
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">chevron_left</span>
+</a>
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body bg-primary/20 text-primary font-bold" href="#">1</a>
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body hover:bg-surface-dark transition-colors" href="#">2</a>
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body hover:bg-surface-dark transition-colors" href="#">3</a>
+<span class="inline-flex items-center justify-center w-10 h-10 text-text-dark-body">...</span>
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body hover:bg-surface-dark transition-colors" href="#">8</a>
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-dark-body hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</main>
+<footer class="bg-surface-dark border-t border-white/10 mt-auto">
+<div class="max-w-7xl mx-auto py-8 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-sm text-text-dark-body">© 2024 Bilal Abic. All Rights Reserved.</p>
+<div class="flex space-x-4">
+<a class="text-text-dark-body hover:text-primary transition-colors" href="#">GitHub</a>
+<a class="text-text-dark-body hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-text-dark-body hover:text-primary transition-colors" href="#">Twitter</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
