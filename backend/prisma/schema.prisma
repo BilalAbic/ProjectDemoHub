@@ -1,0 +1,158 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// PROJECTS
+// ============================================
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(100)
+  description String   @db.VarChar(500)
+  startDate   DateTime @map("start_date") @db.Date
+  endDate     DateTime? @map("end_date") @db.Date
+  demoUrl     String?  @map("demo_url") @db.VarChar(500)
+  githubUrl   String?  @map("github_url") @db.VarChar(500)
+  isPublished Boolean  @default(false) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  // Relations
+  technologies       ProjectTechnology[]
+  contributors       ProjectContributor[]
+  images            ProjectImage[]
+  activities        AdminActivity[]
+
+  @@map("projects")
+}
+
+// ============================================
+// TECHNOLOGIES
+// ============================================
+
+model Technology {
+  id        String   @id @default(uuid())
+  name      String   @unique @db.VarChar(50)
+  slug      String   @unique @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  projects ProjectTechnology[]
+
+  @@map("technologies")
+}
+
+model ProjectTechnology {
+  projectId    String @map("project_id")
+  technologyId String @map("technology_id")
+
+  // Relations
+  project    Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, technologyId])
+  @@map("project_technologies")
+}
+
+// ============================================
+// CONTRIBUTORS
+// ============================================
+
+model Contributor {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(100)
+  email     String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  projects ProjectContributor[]
+
+  @@map("contributors")
+}
+
+model ProjectContributor {
+  projectId     String @map("project_id")
+  contributorId String @map("contributor_id")
+
+  // Relations
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  contributor Contributor @relation(fields: [contributorId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, contributorId])
+  @@map("project_contributors")
+}
+
+// ============================================
+// PROJECT IMAGES
+// ============================================
+
+model ProjectImage {
+  id           String   @id @default(uuid())
+  projectId    String   @map("project_id")
+  imageUrl     String   @map("image_url") @db.VarChar(500)
+  publicId     String   @map("public_id") @db.VarChar(255) // Cloudinary public ID
+  displayOrder Int      @default(0) @map("display_order")
+  isPrimary    Boolean  @default(false) @map("is_primary")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([displayOrder])
+  @@map("project_images")
+}
+
+// ============================================
+// ADMIN & ACTIVITIES
+// ============================================
+
+model AdminActivity {
+  id         String       @id @default(uuid())
+  projectId  String       @map("project_id")
+  actionType ActionType   @map("action_type")
+  details    String?      @db.VarChar(500)
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([createdAt])
+  @@map("admin_activities")
+}
+
+enum ActionType {
+  CREATED
+  UPDATED
+  DELETED
+  COMMENTED
+  PUBLISHED
+  UNPUBLISHED
+}
+
+// ============================================
+// ADMIN USER (Simple single admin setup)
+// ============================================
+
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  name         String   @db.VarChar(100)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
