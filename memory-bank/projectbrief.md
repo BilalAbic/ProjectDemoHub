@@ -58,8 +58,8 @@
 ## Technical Stack
 
 ### Frontend
-- React.js or Next.js
-- Tailwind CSS
+- ✅ **Chosen**: Vite + React 18 + TypeScript
+- ✅ **Styling**: Tailwind CSS v3 with dark mode
 - React Router
 - React Hook Form
 - React Query

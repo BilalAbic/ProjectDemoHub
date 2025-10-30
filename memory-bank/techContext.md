@@ -13,14 +13,15 @@
   - React Router for navigation
   - Portals for modals
 
-#### **Next.js 14+ (Recommended)**
-- **Purpose**: React framework for production
-- **Why Chosen**: SSR/SSG for SEO, file-based routing, API routes, image optimization
+#### **Vite 5+ ✅ CHOSEN**
+- **Purpose**: Fast build tool and dev server for React
+- **Why Chosen**: Lightning-fast HMR, simple config, excellent TypeScript support
 - **Key Features**:
-  - App Router (new paradigm)
-  - Server Components for performance
-  - Built-in Image component
-  - API routes for backend integration
+  - Instant server start
+  - Lightning-fast HMR (Hot Module Replacement)
+  - Optimized production builds with Rollup
+  - Native ES modules support
+  - Simple configuration
 
 #### **Tailwind CSS 3+**
 - **Purpose**: Utility-first CSS framework
@@ -161,7 +162,7 @@
 #### **Docker**
 - **Purpose**: Containerization
 - **Containers**:
-  - Frontend (Next.js app)
+  - Frontend (Vite + React app)
   - Backend (Express API)
   - PostgreSQL database
   - Redis (for sessions/cache)
@@ -176,9 +177,9 @@
   - Automated security scans
 
 #### **Vercel** (Frontend Hosting)
-- **Purpose**: Deploy Next.js app
+- **Purpose**: Deploy React SPA
 - **Why Chosen**: 
-  - Seamless Next.js integration
+  - Excellent for React/Vite apps
   - Automatic deployments from Git
   - Edge functions
   - Free tier for personal projects

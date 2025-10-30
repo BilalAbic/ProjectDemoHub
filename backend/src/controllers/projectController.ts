@@ -26,11 +26,13 @@ export const getProjects = async (req: Request, res: Response) => {
     // Get projects from service
     const result = await projectService.getAllProjects(page, limit, technology);
 
-    // Return success response
+    // Return success response with correct format
     return res.status(200).json({
       success: true,
-      data: result.projects,
-      pagination: result.pagination,
+      data: {
+        projects: result.projects,
+        pagination: result.pagination,
+      },
     });
   } catch (error) {
     console.error('Error fetching projects:', error);

@@ -5,7 +5,7 @@ import { deleteImages } from '@/utils/imageUpload';
  * Get all projects (including unpublished) for admin
  */
 export const getAllProjectsAdmin = async () => {
-  return await prisma.project.findMany({
+  const projects = await prisma.project.findMany({
     include: {
       technologies: { include: { technology: true } },
       contributors: { include: { contributor: true } },
@@ -13,6 +13,13 @@ export const getAllProjectsAdmin = async () => {
     },
     orderBy: { createdAt: 'desc' },
   });
+
+  // Transform to flatten nested relations
+  return projects.map((project) => ({
+    ...project,
+    technologies: project.technologies.map((pt) => pt.technology),
+    contributors: project.contributors.map((pc) => pc.contributor),
+  }));
 };
 
 /**
@@ -26,8 +33,8 @@ export const createProject = async (data: {
   demoUrl?: string | null;
   githubUrl?: string | null;
   isPublished: boolean;
-  technologies: string[]; // Array of technology IDs
-  contributors: string[]; // Array of contributor IDs
+  technologyIds: string[]; // Array of technology IDs
+  contributorIds: string[]; // Array of contributor IDs
   images?: Array<{
     imageUrl: string;
     publicId: string;
@@ -46,23 +53,24 @@ export const createProject = async (data: {
       isPublished: data.isPublished,
       // Connect technologies
       technologies: {
-        create: data.technologies.map((techId) => ({
+        create: data.technologyIds.map((techId) => ({
           technology: { connect: { id: techId } },
         })),
       },
       // Connect contributors
       contributors: {
-        create: data.contributors.map((contrId) => ({
+        create: data.contributorIds.map((contrId) => ({
           contributor: { connect: { id: contrId } },
         })),
       },
       // Create images if provided
-      images: data.images
+      images: data.images && data.images.length > 0
         ? {
-            create: data.images.map((img) => ({
+            create: data.images.map((img, index) => ({
               imageUrl: img.imageUrl,
               publicId: img.publicId,
-              displayOrder: img.displayOrder,
+              displayOrder: img.displayOrder || index,
+              isPrimary: index === 0, // First image is primary
             })),
           }
         : undefined,
@@ -74,7 +82,12 @@ export const createProject = async (data: {
     },
   });
 
-  return project;
+  // Transform to flatten nested relations
+  return {
+    ...project,
+    technologies: project.technologies.map((pt) => pt.technology),
+    contributors: project.contributors.map((pc) => pc.contributor),
+  };
 };
 
 /**
@@ -134,7 +147,12 @@ export const updateProject = async (
     },
   });
 
-  return project;
+  // Transform to flatten nested relations
+  return {
+    ...project,
+    technologies: project.technologies.map((pt) => pt.technology),
+    contributors: project.contributors.map((pc) => pc.contributor),
+  };
 };
 
 /**

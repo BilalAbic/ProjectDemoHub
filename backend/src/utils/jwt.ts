@@ -21,7 +21,7 @@ export const generateAccessToken = (payload: JwtPayload): string => {
     throw new Error('JWT_SECRET is not defined in environment variables');
   }
 
-  const expiresIn = process.env.JWT_EXPIRES_IN || '15m';
+  const expiresIn = process.env.JWT_EXPIRES_IN || '30m'; // Changed from 15m to 30m
   
   // @ts-ignore - JWT library type issue with string literal
   return jwt.sign(payload, secret, { expiresIn });

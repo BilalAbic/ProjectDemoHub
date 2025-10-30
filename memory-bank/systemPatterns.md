@@ -11,7 +11,7 @@
 │  │   Public     │  │    Admin     │  │   Shared     │  │
 │  │   Pages      │  │    Panel     │  │  Components  │  │
 │  └──────────────┘  └──────────────┘  └──────────────┘  │
-│         React/Next.js + Tailwind CSS                    │
+│         Vite + React 18 + Tailwind CSS                  │
 └─────────────────────────────────────────────────────────┘
                          ↕ HTTP/REST API
 ┌─────────────────────────────────────────────────────────┐
@@ -43,8 +43,8 @@
 
 **Decision: Client-Side Routing**
 - **Why**: SPA experience for admin panel, smooth transitions
-- **Implementation**: React Router
-- **Trade-off**: SEO concerns mitigated with Next.js SSR for public pages
+- **Implementation**: React Router v6
+- **Trade-off**: SPA for simplicity; SEO can be added later with SSR if needed
 
 **Decision: State Management**
 - **Global State**: React Context for auth state

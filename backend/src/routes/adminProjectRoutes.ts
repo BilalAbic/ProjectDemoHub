@@ -25,13 +25,13 @@ router.get('/', catchAsync(getProjects));
 
 /**
  * POST /api/admin/projects
- * Create new project
+ * Create new project (with optional images)
  */
-router.post('/', catchAsync(createProject));
+router.post('/', upload.array('images', 10), catchAsync(createProject));
 
 /**
  * PUT /api/admin/projects/:id
- * Update project
+ * Update project (without images - use separate image endpoint)
  */
 router.put('/:id', catchAsync(updateProject));
 

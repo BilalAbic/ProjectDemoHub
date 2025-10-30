@@ -25,12 +25,12 @@ const PORT = process.env.PORT || 4000;
 // Security headers
 app.use(helmet());
 
-// CORS configuration
+// CORS configuration - Allow both 3000 and 3001 ports for development
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
