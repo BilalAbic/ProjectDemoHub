@@ -34,16 +34,14 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
-          appSourcePath: ${{ github.workspace }}
-          _dockerfilePathKey_: _dockerfilePath_
-          _targetLabelKey_: _targetLabel_
+          appSourcePath: ${{ github.workspace }}/backend
+          dockerfilePath: backend/Dockerfile
           registryUrl: demohubregistry.azurecr.io
           registryUsername: ${{ secrets.DEMOHUBBACKEND_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.DEMOHUBBACKEND_REGISTRY_PASSWORD }}
           containerAppName: demohub-backend
           resourceGroup: demohub-rg
           imageToBuild: demohubregistry.azurecr.io/demohub-backend:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
+          targetPort: 4000
 
 
