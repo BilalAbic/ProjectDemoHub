@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://demohub-backend.ashywave-14cbf8c3.westus2.azurecontainerapps.io/api',
+  baseURL: 'https://demohub-backend.ashywave-14cbf8c3.westus2.azurecontainerapps.io/api',
   withCredentials: true, // Send cookies with requests
   timeout: 10000, // 10 second timeout
 });
@@ -74,7 +74,7 @@ api.interceptors.response.use(
         // Try to refresh the token
         console.log('🔄 Token expired, refreshing...');
         const { data } = await axios.post(
-          'http://demohub-backend.ashywave-14cbf8c3.westus2.azurecontainerapps.io/api/admin/refresh',
+          'https://demohub-backend.ashywave-14cbf8c3.westus2.azurecontainerapps.io/api/admin/refresh',
           {},
           { withCredentials: true }
         );
