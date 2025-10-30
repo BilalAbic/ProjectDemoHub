@@ -14,6 +14,9 @@ import adminProjectRoutes from '@/routes/adminProjectRoutes';
 // Load environment variables
 dotenv.config();
 
+// Map Azure Container Apps env vars (kebab-case) to app format (UPPER_SNAKE_CASE)
+import '@/config/env';
+
 // Create Express app
 const app: Application = express();
 const PORT = process.env.PORT || 4000;

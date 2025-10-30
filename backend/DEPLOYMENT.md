@@ -4,32 +4,37 @@
 
 ### Required Environment Variables
 
-Azure Container Apps'te aşağıdaki environment variables'ları ayarlamanız gerekiyor:
+⚠️ **IMPORTANT**: Azure Container Apps requires lowercase with hyphens (kebab-case).
+The backend automatically maps these to UPPER_SNAKE_CASE format.
+
+Azure Portal'da **Container Apps → Environment Variables** bölümünden şu değişkenleri ekleyin:
 
 ```bash
 # Database (Azure PostgreSQL veya başka bir PostgreSQL instance)
-DATABASE_URL=postgresql://user:password@host:5432/database
+database-url=postgresql://user:password@host:5432/database
 
 # JWT Secrets (güçlü, rastgele değerler kullanın)
-JWT_SECRET=your-super-secret-jwt-key-min-32-chars
-JWT_REFRESH_SECRET=your-refresh-secret-key-even-longer
+jwt-secret=your-super-secret-jwt-key-min-32-chars
+jwt-refresh-secret=your-refresh-secret-key-even-longer
 
 # Cloudinary (Image Storage)
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+cloudinary-cloud-name=your_cloud_name
+cloudinary-api-key=your_api_key
+cloudinary-api-secret=your_api_secret
 
 # Admin User (İlk admin kullanıcısı için)
-ADMIN_EMAIL=admin@demohub.com
-ADMIN_PASSWORD=YourStrongPassword123!
+admin-email=admin@demohub.com
+admin-password=YourStrongPassword123!
 
 # Application Settings
-PORT=4000
-NODE_ENV=production
-CORS_ORIGIN=https://your-frontend-url.azurestaticapps.net
-JWT_EXPIRES_IN=30m
-JWT_REFRESH_EXPIRES_IN=7d
+port=4000
+node-env=production
+cors-origin=https://your-frontend-url.azurestaticapps.net
+jwt-expires-in=30m
+jwt-refresh-expires-in=7d
 ```
+
+**Not**: Backend kodu bu değişkenleri otomatik olarak `DATABASE_URL`, `JWT_SECRET` vb. formatına çevirir.
 
 ### Azure Container Apps Configuration
 
