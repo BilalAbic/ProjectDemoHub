@@ -37,18 +37,28 @@ export function useUpdateProject() {
 
   return useMutation({
     mutationFn: async ({ id, projectData }: { id: string; projectData: FormData }) => {
+      console.log('🔄 useUpdateProject: Starting update for project:', id);
       const { data } = await api.put<ApiResponse<Project>>(`/admin/projects/${id}`, projectData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+      console.log('✅ useUpdateProject: Update successful, response:', data);
       return data.data;
     },
-    onSuccess: () => {
-      // Aggressively invalidate and refetch
+    onSuccess: (data) => {
+      console.log('🔄 useUpdateProject: onSuccess called, updated project:', data);
+      
+      // Remove all cached data for admin-projects and projects
+      queryClient.removeQueries({ queryKey: ['admin-projects'] });
+      queryClient.removeQueries({ queryKey: ['projects'] });
+      
+      // Force immediate refetch
       queryClient.invalidateQueries({ queryKey: ['admin-projects'], refetchType: 'active' });
       queryClient.invalidateQueries({ queryKey: ['projects'], refetchType: 'active' });
       
-      // Also refetch immediately
-      queryClient.refetchQueries({ queryKey: ['admin-projects'] });
+      console.log('✅ useUpdateProject: Cache cleared and refetch triggered');
+    },
+    onError: (error) => {
+      console.error('❌ useUpdateProject: Update failed:', error);
     },
   });
 }

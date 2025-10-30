@@ -20,8 +20,8 @@ export function HomePage() {
     selectedTech === 'all' ? undefined : selectedTech
   );
 
-  const handleTechSelect = (techId: string) => {
-    setSelectedTech(techId);
+  const handleTechSelect = (techSlug: string) => {
+    setSelectedTech(techSlug);
     setCurrentPage(1); // Reset to first page when filter changes
   };
 

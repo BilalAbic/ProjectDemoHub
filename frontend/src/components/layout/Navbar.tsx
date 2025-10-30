@@ -4,14 +4,14 @@ import { useState } from 'react';
 interface NavbarProps {
   selectedTech?: string;
   onTechSelect?: (tech: string) => void;
-  technologies?: Array<{ id: string; name: string }>;
+  technologies?: Array<{ id: string; name: string; slug: string }>;
 }
 
 export function Navbar({ selectedTech, onTechSelect, technologies = [] }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const techFilters = [
-    { id: 'all', name: 'All' },
+    { id: 'all', name: 'All', slug: 'all' },
     ...technologies.slice(0, 4), // Show first 4 technologies
   ];
 
@@ -33,9 +33,9 @@ export function Navbar({ selectedTech, onTechSelect, technologies = [] }: Navbar
               {techFilters.map((tech) => (
                 <button
                   key={tech.id}
-                  onClick={() => onTechSelect?.(tech.id)}
+                  onClick={() => onTechSelect?.(tech.slug)}
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                    (selectedTech === tech.id || (tech.id === 'all' && !selectedTech))
+                    (selectedTech === tech.slug || (tech.slug === 'all' && !selectedTech))
                       ? 'bg-primary/20 text-text-dark-heading'
                       : 'text-text-dark-body hover:text-text-dark-heading'
                   }`}
@@ -66,11 +66,11 @@ export function Navbar({ selectedTech, onTechSelect, technologies = [] }: Navbar
               <button
                 key={tech.id}
                 onClick={() => {
-                  onTechSelect?.(tech.id);
+                  onTechSelect?.(tech.slug);
                   setMobileMenuOpen(false);
                 }}
                 className={`w-full text-left px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                  (selectedTech === tech.id || (tech.id === 'all' && !selectedTech))
+                  (selectedTech === tech.slug || (tech.slug === 'all' && !selectedTech))
                     ? 'bg-primary/20 text-text-dark-heading'
                     : 'text-text-dark-body hover:text-text-dark-heading'
                 }`}

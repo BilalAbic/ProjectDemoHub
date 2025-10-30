@@ -11,7 +11,6 @@ export function ProjectsPage() {
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
-  const [deletingProjectId, setDeletingProjectId] = useState<string | null>(null);
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
@@ -121,7 +120,7 @@ export function ProjectsPage() {
                           </button>
                           <button
                             onClick={() => handleDelete(project.id)}
-                            disabled={deletingProjectId === project.id}
+                            disabled={deleteProject.isPending}
                             className="p-2 text-text-dark-body hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50"
                             title="Delete"
                           >

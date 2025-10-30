@@ -123,8 +123,18 @@ All components follow a consistent design system with dark mode support:
   - Date pickers
   - URL validation
   - Technology multi-select
-  - Image upload with preview
+  - Image upload with preview (create mode)
+  - **Full image management** (edit mode - NEW Oct 30):
+    - Display existing images in grid
+    - Delete images with hover button
+    - Upload new images
+    - Preview new uploads with badge
   - Publish toggle
+  - **Full image management in edit mode** (NEW - Oct 30)
+    - Display existing images
+    - Delete images with confirmation
+    - Upload new images
+    - Preview with "NEW" badge
 
 ## 🔐 Authentication Flow
 1. User navigates to `/admin/login`
@@ -199,11 +209,12 @@ Frontend uses Vite proxy to connect to backend API:
 All `/api/*` requests are proxied to the backend.
 
 ## ✅ What's Working
-- ✅ Public project gallery with filtering
-- ✅ Project detail modal with image gallery
+- ✅ Public project gallery with **working technology filters** (Fixed - Oct 30)
+- ✅ Project detail modal with **enhanced UX** (Close button, backdrop click - Oct 30)
 - ✅ Admin authentication
 - ✅ Dashboard statistics
 - ✅ Project CRUD operations
+- ✅ **Full image management in edit mode** (NEW - Oct 30)
 - ✅ Image upload and management
 - ✅ Form validation
 - ✅ Error handling
@@ -222,7 +233,7 @@ All `/api/*` requests are proxied to the backend.
 6. **SEO**: Meta tags and social sharing
 
 ## 🎉 Achievement
-**34/40 tasks complete (85%)** - Full-stack application ready!
+**38/40 tasks complete (95%)** - Full-stack application ready with polished UX!
 
 ---
 

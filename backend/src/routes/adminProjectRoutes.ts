@@ -32,8 +32,9 @@ router.post('/', upload.array('images', 10), catchAsync(createProject));
 /**
  * PUT /api/admin/projects/:id
  * Update project (without images - use separate image endpoint)
+ * IMPORTANT: upload.none() is needed to parse FormData fields
  */
-router.put('/:id', catchAsync(updateProject));
+router.put('/:id', upload.none(), catchAsync(updateProject));
 
 /**
  * DELETE /api/admin/projects/:id

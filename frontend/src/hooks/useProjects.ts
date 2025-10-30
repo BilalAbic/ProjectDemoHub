@@ -2,17 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
 import { PaginatedProjects, Technology, ApiResponse } from '@/types';
 
-export function useProjects(page: number = 1, limit: number = 8, technologyId?: string) {
+export function useProjects(page: number = 1, limit: number = 8, technologySlug?: string) {
   return useQuery({
-    queryKey: ['projects', page, limit, technologyId],
+    queryKey: ['projects', page, limit, technologySlug],
     queryFn: async () => {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: limit.toString(),
       });
       
-      if (technologyId && technologyId !== 'all') {
-        params.append('technology', technologyId);
+      if (technologySlug && technologySlug !== 'all') {
+        params.append('technology', technologySlug);
       }
 
       const { data } = await api.get<ApiResponse<PaginatedProjects>>(

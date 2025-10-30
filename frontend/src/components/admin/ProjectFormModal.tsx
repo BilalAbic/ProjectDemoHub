@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal, Button, Input, Textarea } from '@/components/ui';
-import { useCreateProject, useUpdateProject } from '@/hooks/useAdminProjects';
+import { useCreateProject, useUpdateProject, useDeleteImage } from '@/hooks/useAdminProjects';
 import { useTechnologies } from '@/hooks/useProjects';
 import { Project } from '@/types';
+import api from '@/lib/api';
 
 interface ProjectFormModalProps {
   isOpen: boolean;
@@ -27,10 +28,12 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
   const isEditing = !!project;
   const createProject = useCreateProject();
   const updateProject = useUpdateProject();
+  const deleteImage = useDeleteImage();
   const { data: technologies } = useTechnologies();
 
   const [selectedTechIds, setSelectedTechIds] = useState<string[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [existingImages, setExistingImages] = useState<any[]>([]);
 
   const {
     register,
@@ -66,6 +69,7 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
         technologyIds: project.technologies.map((t) => t.id),
       });
       setSelectedTechIds(project.technologies.map((t) => t.id));
+      setExistingImages(project.images || []);
     } else {
       // Reset form to empty state for new project
       reset({
@@ -79,6 +83,7 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
         technologyIds: [],
       });
       setSelectedTechIds([]);
+      setExistingImages([]);
     }
   }, [project, reset]);
 
@@ -108,6 +113,40 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
     );
   };
 
+  const handleDeleteExistingImage = async (imageId: string) => {
+    if (!project || !confirm('Are you sure you want to delete this image?')) return;
+
+    try {
+      await deleteImage.mutateAsync({ projectId: project.id, imageId });
+      setExistingImages((prev) => prev.filter((img) => img.id !== imageId));
+      alert('Image deleted successfully!');
+    } catch (error: any) {
+      console.error('❌ Failed to delete image:', error);
+      alert(error.response?.data?.error?.message || 'Failed to delete image');
+    }
+  };
+
+  const handleUploadNewImages = async (files: FileList) => {
+    if (!project) return;
+
+    try {
+      // Upload images one by one
+      for (let i = 0; i < files.length; i++) {
+        const singleFormData = new FormData();
+        singleFormData.append('image', files[i]);
+        const response = await api.post(`/admin/projects/${project.id}/images`, singleFormData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        setExistingImages((prev) => [...prev, response.data.data]);
+      }
+
+      alert('Images uploaded successfully!');
+    } catch (error: any) {
+      console.error('❌ Failed to upload images:', error);
+      alert(error.response?.data?.error?.message || 'Failed to upload images');
+    }
+  };
+
   const onSubmit = async (data: ProjectFormInputs) => {
     try {
       console.log('📤 Submitting form data:', { ...data, selectedTechIds, isEditing });
@@ -116,9 +155,10 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
       formData.append('name', data.name);
       formData.append('description', data.description);
       formData.append('startDate', data.startDate);
-      if (data.endDate) formData.append('endDate', data.endDate);
-      if (data.demoUrl) formData.append('demoUrl', data.demoUrl);
-      if (data.githubUrl) formData.append('githubUrl', data.githubUrl);
+      // Always send endDate, even if empty (to allow clearing it)
+      formData.append('endDate', data.endDate || '');
+      formData.append('demoUrl', data.demoUrl || '');
+      formData.append('githubUrl', data.githubUrl || '');
       formData.append('isPublished', String(data.isPublished));
 
       // Add technologies
@@ -143,15 +183,24 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
         console.log('🔄 Updating project:', project.id);
         await updateProject.mutateAsync({ id: project.id, projectData: formData });
         console.log('✅ Project updated successfully');
+
+        // Upload new images if any
+        if (data.images && data.images.length > 0) {
+          await handleUploadNewImages(data.images);
+        }
+
+        alert('Project updated successfully!');
       } else {
         console.log('➕ Creating new project');
         await createProject.mutateAsync(formData);
         console.log('✅ Project created successfully');
+        alert('Project created successfully!');
       }
 
       reset();
       setSelectedTechIds([]);
       setPreviewImages([]);
+      setExistingImages([]);
       onClose();
     } catch (error: any) {
       console.error('❌ Failed to save project:', error);
@@ -163,6 +212,7 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
     reset();
     setSelectedTechIds([]);
     setPreviewImages([]);
+    setExistingImages([]);
     onClose();
   };
 
@@ -267,52 +317,74 @@ export function ProjectFormModal({ isOpen, onClose, project }: ProjectFormModalP
           </div>
 
           {/* Images */}
-          {!isEditing && (
-            <div>
-              <label className="block text-sm font-medium text-text-dark-body mb-3">
-                Project Images (optional)
-              </label>
-              <div className="flex items-center justify-center w-full">
-                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-white/10 border-dashed rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <span className="material-symbols-outlined text-4xl text-text-dark-body/50 mb-2">
-                      cloud_upload
-                    </span>
-                    <p className="mb-2 text-sm text-text-dark-body">
-                      <span className="font-semibold">Click to upload</span> or drag and drop
-                    </p>
-                    <p className="text-xs text-text-dark-body/70">PNG, JPG, WEBP (MAX. 5MB each)</p>
-                  </div>
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    className="hidden"
-                    {...register('images')}
-                  />
-                </label>
-              </div>
+          <div>
+            <label className="block text-sm font-medium text-text-dark-body mb-3">
+              Project Images {!isEditing && '(optional)'}
+            </label>
 
-              {/* Image Previews */}
-              {previewImages.length > 0 && (
-                <div className="grid grid-cols-3 gap-4 mt-4">
-                  {previewImages.map((preview, index) => (
-                    <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
-                      <img src={preview} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
+            {/* Existing Images (Edit Mode) */}
+            {isEditing && existingImages.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+                {existingImages.map((image) => (
+                  <div key={image.id} className="relative group aspect-square rounded-lg overflow-hidden">
+                    <img
+                      src={image.imageUrl}
+                      alt={`Project image ${image.displayOrder}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteExistingImage(image.id)}
+                        className="p-2 text-white hover:text-red-400 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                      >
+                        <span className="material-symbols-outlined">delete</span>
+                      </button>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {isEditing && (
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-              <p className="text-sm text-blue-400">
-                To manage images for this project, use the image management section after saving.
-              </p>
+            {/* Upload New Images */}
+            <div className="flex items-center justify-center w-full">
+              <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-white/10 border-dashed rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <span className="material-symbols-outlined text-4xl text-text-dark-body/50 mb-2">
+                    cloud_upload
+                  </span>
+                  <p className="mb-2 text-sm text-text-dark-body">
+                    <span className="font-semibold">Click to upload</span> or drag and drop
+                  </p>
+                  <p className="text-xs text-text-dark-body/70">
+                    PNG, JPG, WEBP (MAX. 5MB each)
+                    {isEditing && ' - Images will be uploaded after saving'}
+                  </p>
+                </div>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  {...register('images')}
+                />
+              </label>
             </div>
-          )}
+
+            {/* New Image Previews */}
+            {previewImages.length > 0 && (
+              <div className="grid grid-cols-3 gap-4 mt-4">
+                {previewImages.map((preview, index) => (
+                  <div key={index} className="relative aspect-video rounded-lg overflow-hidden border-2 border-primary/30">
+                    <img src={preview} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
+                    <div className="absolute top-2 right-2 bg-primary text-background-dark text-xs font-bold px-2 py-1 rounded">
+                      NEW
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </Modal.Body>
 
         <Modal.Footer>

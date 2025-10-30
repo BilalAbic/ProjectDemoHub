@@ -107,6 +107,8 @@ export const updateProject = async (
     contributors?: string[]; // Array of contributor IDs
   }
 ) => {
+  console.log('🔧 adminProjectService.updateProject called:', { id, data });
+  
   // If technologies are provided, delete old ones and create new
   const techUpdate = data.technologies
     ? {
@@ -116,6 +118,8 @@ export const updateProject = async (
         })),
       }
     : undefined;
+  
+  console.log('🔧 Technology update object:', techUpdate);
 
   // If contributors are provided, delete old ones and create new
   const contribUpdate = data.contributors
@@ -126,6 +130,21 @@ export const updateProject = async (
         })),
       }
     : undefined;
+
+  console.log('🔧 Prisma update data:', {
+    where: { id },
+    data: {
+      name: data.name,
+      description: data.description,
+      startDate: data.startDate,
+      endDate: data.endDate,
+      demoUrl: data.demoUrl,
+      githubUrl: data.githubUrl,
+      isPublished: data.isPublished,
+      hasTechUpdate: !!techUpdate,
+      hasContribUpdate: !!contribUpdate,
+    }
+  });
 
   const project = await prisma.project.update({
     where: { id },
@@ -147,12 +166,28 @@ export const updateProject = async (
     },
   });
 
+  console.log('✅ Prisma update successful, project from DB:', {
+    id: project.id,
+    name: project.name,
+    description: project.description?.substring(0, 50),
+    technologiesCount: project.technologies.length,
+    imagesCount: project.images.length,
+  });
+
   // Transform to flatten nested relations
-  return {
+  const flattenedProject = {
     ...project,
     technologies: project.technologies.map((pt) => pt.technology),
     contributors: project.contributors.map((pc) => pc.contributor),
   };
+  
+  console.log('✅ Returning flattened project:', {
+    id: flattenedProject.id,
+    name: flattenedProject.name,
+    technologiesCount: flattenedProject.technologies.length,
+  });
+  
+  return flattenedProject;
 };
 
 /**

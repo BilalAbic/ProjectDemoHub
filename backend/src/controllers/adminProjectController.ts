@@ -218,6 +218,13 @@ export const updateProject = async (req: Request, res: Response) => {
     technologyIds = technologyIds.filter((id: any) => id && typeof id === 'string');
     
     console.log('✅ Parsed update data:', { name, description, startDate, endDate, demoUrl, githubUrl, isPublished, technologyIds });
+    console.log('📊 Data types:', {
+      nameType: typeof name,
+      descriptionType: typeof description,
+      startDateType: typeof startDate,
+      technologyIdsType: typeof technologyIds,
+      technologyIdsLength: technologyIds?.length
+    });
 
     // Validate UUID
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -274,8 +281,19 @@ export const updateProject = async (req: Request, res: Response) => {
     if (isPublished !== undefined) updateData.isPublished = isPublished;
     if (technologyIds.length > 0) updateData.technologies = technologyIds;
 
+    console.log('⚠️⚠️⚠️ UPDATE DATA OBJECT:', JSON.stringify(updateData, null, 2));
+    console.log('⚠️⚠️⚠️ UPDATE DATA KEYS:', Object.keys(updateData));
+    console.log('⚠️⚠️⚠️ NAME VALUE:', name, 'TYPE:', typeof name);
+
     // Update project
+    console.log('🔄 Calling adminProjectService.updateProject with:', { id, updateData });
     const project = await adminProjectService.updateProject(id, updateData);
+    console.log('✅ Project updated successfully in database:', {
+      id: project.id,
+      name: project.name,
+      technologiesCount: project.technologies?.length,
+      updatedAt: project.updatedAt
+    });
 
     return res.status(200).json({
       success: true,

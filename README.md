@@ -2,8 +2,9 @@
 
 <div align="center">
 
-![Status](https://img.shields.io/badge/status-planning-blue)
-![Progress](https://img.shields.io/badge/progress-5%25-yellow)
+![Status](https://img.shields.io/badge/status-testing-green)
+![Progress](https://img.shields.io/badge/progress-92%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-249%20passing-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 *A modern, full-stack portfolio management system with admin panel*
@@ -22,19 +23,20 @@ DemoHub is a comprehensive portfolio management system that allows developers to
 
 #### Public Portfolio
 - 🎨 Beautiful dark-mode interface with glassmorphism effects
-- 🔍 Filter projects by technology (React, Node.js, Python, Vue.js)
-- 📱 Fully responsive design (mobile to 4K)
-- 🖼️ Rich project details with image galleries
-- 🔗 Direct links to live demos and GitHub repositories
+- � Filtyer projects by technology (React, Node.js, Python, Vue.js, etc.)
+- �  Fully responsive design (mobile to 4K)
+- �️ Rrich project details with image galleries
+- � PDirect links to live demos and GitHub repositories
 - 📄 Pagination support
 
 #### Admin Panel
 - 📊 Dashboard with real-time statistics
 - ✏️ Full CRUD operations for projects
-- 🖼️ Advanced image management (upload, reorder, delete)
-- 📝 Rich project editing with technology tagging
-- 👥 Multi-contributor support
-- 🔒 Secure JWT authentication
+- �️R Advanced image management (upload, delete in edit mode)
+- � Ruich project editing with technology tagging
+- � Meulti-contributor support
+- 🔒 Secure JWT authentication with auto-refresh
+- 💾 Persistent sessions (F5-safe)
 
 ---
 
@@ -59,25 +61,36 @@ Text Dark Body:        #A0B0B0
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework:** Next.js 14+ (React 18)
+- **Framework:** Vite + React 18
+- **Language:** TypeScript
 - **Styling:** Tailwind CSS 3+
 - **State Management:** React Context + React Query
 - **Forms:** React Hook Form
 - **HTTP Client:** Axios
+- **Routing:** React Router v6
 
 ### Backend
 - **Runtime:** Node.js 18+ (LTS)
 - **Framework:** Express.js 4+
+- **Language:** TypeScript
 - **Database:** PostgreSQL 15+
 - **ORM:** Prisma 5+
 - **Authentication:** JWT (jsonwebtoken)
 - **Image Storage:** Cloudinary
+- **Security:** Helmet, CORS, bcrypt
+
+### Testing
+- **Backend:** Jest + ts-jest + Supertest
+- **Frontend:** Vitest + React Testing Library
+- **Coverage:** 249 tests passing
+  - Backend: 138 tests (99.23% service coverage)
+  - Frontend: 111 tests (~60% coverage)
 
 ### DevOps
-- **Containerization:** Docker
-- **CI/CD:** GitHub Actions
-- **Frontend Hosting:** Vercel
-- **Backend Hosting:** Railway / Render
+- **Containerization:** Docker (PostgreSQL)
+- **CI/CD:** GitHub Actions (ready)
+- **Frontend Hosting:** Vercel (ready)
+- **Backend Hosting:** Railway / Render (ready)
 
 ---
 
@@ -85,70 +98,75 @@ Text Dark Body:        #A0B0B0
 
 ```
 DemoHub/
-├── memory-bank/              # 🧠 Cline Memory Bank (Project Documentation)
-│   ├── projectbrief.md       # Project requirements and objectives
-│   ├── productContext.md     # Product philosophy and UX goals
-│   ├── systemPatterns.md     # Architecture and design patterns
-│   ├── techContext.md        # Technology stack and setup
-│   ├── activeContext.md      # Current work focus and decisions
-│   └── progress.md           # What's done and what's left
-├── backend/                  # ✅ Express.js Backend API (Setup Complete!)
-│   ├── prisma/              # Database schema and migrations
-│   ├── src/                 # TypeScript source code
-│   │   ├── config/         # Configuration files
+├── memory-bank/              # 🧠 Project Documentation
+│   ├── projectbrief.md       # Project requirements
+│   ├── productContext.md     # Product philosophy
+│   ├── systemPatterns.md     # Architecture
+│   ├── techContext.md        # Technology stack
+│   ├── activeContext.md      # Current work
+│   └── progress.md           # Progress tracking
+├── backend/                  # ✅ Express.js Backend API
+│   ├── prisma/              # Database schema
+│   ├── src/                 # TypeScript source
+│   │   ├── config/         # Configuration
 │   │   ├── controllers/    # Route controllers
 │   │   ├── middlewares/    # Express middlewares
 │   │   ├── routes/         # API routes
 │   │   ├── services/       # Business logic
-│   │   ├── types/          # TypeScript types
 │   │   ├── utils/          # Helper functions
-│   │   ├── validators/     # Input validation
 │   │   └── server.ts       # Express app
+│   ├── tests/              # Jest tests (138 tests)
 │   ├── docker-compose.yml  # Docker services
-│   ├── package.json        # Dependencies
-│   ├── tsconfig.json       # TypeScript config
-│   └── README.md           # Backend documentation
-├── frontend/                 # ⚛️ Next.js Frontend Application (Coming Soon)
-├── AGENT.md                  # 🤖 Cline Memory Bank Instructions
-├── SETUP_INSTRUCTIONS.md     # 📝 Quick setup guide
-└── README.md                 # 📖 This file
+│   └── README.md           # Backend docs
+├── frontend/                 # ⚛️ Vite + React Frontend
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   ├── pages/          # Page components
+│   │   ├── hooks/          # Custom hooks
+│   │   ├── contexts/       # React contexts
+│   │   ├── lib/            # Utilities
+│   │   ├── types/          # TypeScript types
+│   │   └── tests/          # Vitest tests (111 tests)
+│   └── README.md           # Frontend docs
+├── TESTING.md                # Testing guide
+└── README.md                 # This file
 ```
 
 ---
 
 ## 🎯 Current Status
 
-**Phase:** 🔧 Backend Project Setup  
-**Progress:** 15% Complete  
-**Last Updated:** October 29, 2025
+**Phase:** 🧪 Testing & Deployment Preparation  
+**Progress:** 92% Complete  
+**Last Updated:** October 30, 2025
 
-### ✅ Completed
-- [x] Memory Bank documentation (6 files)
-- [x] Requirements analysis
-- [x] Design reference analysis
-- [x] Technology stack decisions
-- [x] Database schema design
-- [x] API endpoint planning
-- [x] **Backend project setup** ⭐ NEW
-  - Node.js + TypeScript + Express
-  - Prisma ORM with complete schema
-  - Docker Compose (PostgreSQL, Redis, pgAdmin)
-  - ESLint + Prettier configuration
-  - Full folder structure
-  - Environment template
-  - Seed script
+### ✅ Completed (92%)
+- [x] Memory Bank documentation
+- [x] Backend setup & deployment
+- [x] Database schema & migrations
+- [x] Public API endpoints
+- [x] Authentication system (JWT + auto-refresh)
+- [x] Admin CRUD endpoints
+- [x] Frontend setup & deployment
+- [x] Public pages (HomePage, ProjectDetail)
+- [x] Admin panel (Dashboard, Projects CRUD)
+- [x] Image management (Cloudinary)
+- [x] Session management (persistent)
+- [x] Bug fixes & polish
+- [x] **Backend tests (138 tests, 99.23% service coverage)** ⭐
+- [x] **Frontend tests (111 tests, ~60% coverage)** ⭐
 
-### 🚧 In Progress
-- [ ] Install dependencies and test backend
-- [ ] Run database migrations
-- [ ] Initialize Git repository
+### 🚧 In Progress (8%)
+- [ ] Deployment to production
+- [ ] Performance optimization
+- [ ] Final documentation
 
 ### ⏳ Next Steps
-1. Initialize Git repository
-2. Set up backend project (Node.js + Express + Prisma)
-3. Set up frontend project (Next.js + Tailwind)
-4. Create database schema and migrations
-5. Implement public API endpoints
+1. Deploy backend to Railway/Render
+2. Deploy frontend to Vercel
+3. Set up monitoring (Sentry)
+4. Performance audit (Lighthouse)
+5. Final documentation
 
 ---
 
@@ -158,31 +176,46 @@ DemoHub/
 ```bash
 Node.js >= 18.0.0
 PostgreSQL >= 15.0 (or Docker)
-npm >= 9.0.0 or yarn >= 1.22.0
-Git
+npm >= 9.0.0
 Docker Desktop (recommended)
 ```
 
 ### Quick Installation
 
 ```bash
-# 1. Clone the repository (when available)
+# 1. Clone the repository
 git clone https://github.com/bilalabic/demohub.git
 cd demohub
 
 # 2. Backend setup
 cd backend
 npm install                    # Install dependencies
-cp .env.example .env          # Copy environment template (edit with your values)
+cp .env.example .env          # Copy environment template
+# Edit .env with your values (DATABASE_URL, JWT_SECRET, CLOUDINARY_*)
 docker-compose up -d postgres # Start PostgreSQL
 npm run prisma:migrate        # Run database migrations
 npm run prisma:seed           # Seed initial data
-npm run dev                   # Start backend server (port 4000)
+npm run dev                   # Start backend (port 4000)
 
-# 3. Frontend setup (coming soon)
+# 3. Frontend setup
 cd ../frontend
-npm install
-npm run dev                   # Start frontend (port 3000)
+npm install                   # Install dependencies
+npm run dev                   # Start frontend (port 5173)
+```
+
+### Running Tests
+
+```bash
+# Backend tests
+cd backend
+npm test                      # Run all tests
+npm run test:coverage         # With coverage report
+
+# Frontend tests
+cd frontend
+npm test                      # Run all tests
+npm run test:ui               # With UI
+npm run test:coverage         # With coverage report
 ```
 
 **📝 For detailed setup instructions, see [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md)**
@@ -191,87 +224,100 @@ npm run dev                   # Start frontend (port 3000)
 
 ## 📚 Documentation
 
-All project documentation is maintained in the **Memory Bank** (`memory-bank/` folder). This ensures continuity and clear understanding of the project for both current and future developers.
+### Main Documentation
+- **[README.md](README.md)** - This file (project overview)
+- **[TESTING.md](TESTING.md)** - Testing guide (249 tests)
+- **[SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md)** - Setup guide
 
-### Memory Bank Files
+### Memory Bank (Project Context)
+1. **[projectbrief.md](memory-bank/projectbrief.md)** - Requirements & objectives
+2. **[productContext.md](memory-bank/productContext.md)** - Product philosophy
+3. **[systemPatterns.md](memory-bank/systemPatterns.md)** - Architecture
+4. **[techContext.md](memory-bank/techContext.md)** - Technology stack
+5. **[activeContext.md](memory-bank/activeContext.md)** - Current work
+6. **[progress.md](memory-bank/progress.md)** - Progress tracking
 
-1. **[projectbrief.md](memory-bank/projectbrief.md)**  
-   Complete project overview, objectives, tech stack, database schema, and deliverables.
-
-2. **[productContext.md](memory-bank/productContext.md)**  
-   Why the project exists, problems it solves, user flows, and experience goals.
-
-3. **[systemPatterns.md](memory-bank/systemPatterns.md)**  
-   System architecture, design patterns, component relationships, and critical paths.
-
-4. **[techContext.md](memory-bank/techContext.md)**  
-   Detailed technology stack, dependencies, development setup, and constraints.
-
-5. **[activeContext.md](memory-bank/activeContext.md)**  
-   Current work focus, recent changes, decisions, learnings, and next steps.
-
-6. **[progress.md](memory-bank/progress.md)**  
-   Detailed progress tracking, what works, what's left to build, and milestones.
+### Component Documentation
+- **[backend/README.md](backend/README.md)** - Backend API documentation
+- **[backend/tests/README.md](backend/tests/README.md)** - Backend testing
+- **[frontend/src/tests/README.md](frontend/src/tests/README.md)** - Frontend testing
 
 ---
 
-## 🎨 Design References
+## 🧪 Testing
 
-Design mockups and HTML/CSS references are available in these folders:
-- `HomePage/` - Main project gallery page
-- `ProjectComponent/` - Project detail modal
-- `AdminHome/` - Admin dashboard
-- `AdminProjects/` - Project management page
-- `AdminProjectNewComponent/` - Add project modal
-- `AdminProjectEditComponent/` - Edit project modal
+### Test Coverage
+```
+Total Tests: 249 passing ✅
 
-Each folder contains:
-- `screen.png` - Visual design mockup
-- `code.html` - HTML/Tailwind implementation reference
+Backend (Jest):
+- Test Suites: 6 passed
+- Tests: 138 passed
+- Coverage: 31.06% overall, 99.23% services
+- Time: ~8 seconds
+
+Frontend (Vitest):
+- Test Suites: 5 passed
+- Tests: 111 passed
+- Coverage: ~60%
+- Time: ~7 seconds
+```
+
+### What's Tested
+**Backend:**
+- ✅ JWT utilities (25 tests)
+- ✅ CatchAsync utility (8 tests)
+- ✅ Auth service (27 tests)
+- ✅ Project service (22 tests)
+- ✅ Technology service (18 tests)
+- ✅ Admin project service (38 tests)
+
+**Frontend:**
+- ✅ Utility functions (34 tests)
+- ✅ Button component (27 tests)
+- ✅ useProjects hook (16 tests)
+- ✅ useAdminProjects hook (18 tests)
+- ✅ Example tests (16 tests)
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ API Endpoints
 
-### Phase 1: Foundation (Week 1)
-- [x] Planning & Documentation
-- [ ] Project setup (Git, folders, dependencies)
-- [ ] Database schema implementation
-- [ ] Basic backend API
-- [ ] Authentication system
+### Public API
+```
+GET    /api/projects          # List projects (paginated)
+GET    /api/projects/:id      # Get project details
+GET    /api/technologies      # List technologies
+```
 
-### Phase 2: Public Pages (Week 2)
-- [ ] HomePage with project grid
-- [ ] Technology filtering
-- [ ] Pagination
-- [ ] ProjectComponent modal
-- [ ] Responsive design
+### Admin API (Protected)
+```
+POST   /api/admin/login       # Admin login
+POST   /api/admin/logout      # Admin logout
+POST   /api/admin/refresh     # Refresh token
+GET    /api/admin/me          # Get current admin
 
-### Phase 3: Admin Panel (Week 3)
-- [ ] Admin dashboard
-- [ ] Project CRUD operations
-- [ ] Image upload and management
-- [ ] Form validation
+GET    /api/admin/projects    # List all projects
+POST   /api/admin/projects    # Create project
+PUT    /api/admin/projects/:id # Update project
+DELETE /api/admin/projects/:id # Delete project
 
-### Phase 4: Polish & Deploy (Week 4)
-- [ ] Testing (unit, integration, E2E)
-- [ ] Performance optimization
-- [ ] Accessibility improvements
-- [ ] Production deployment
-- [ ] Final documentation
+POST   /api/admin/projects/:id/images      # Upload images
+DELETE /api/admin/projects/:id/images/:imageId # Delete image
+```
 
 ---
 
 ## 📊 Database Schema
 
 ### Core Tables
-- **Projects** - Main project information
-- **Technologies** - Available technologies (React, Node.js, etc.)
-- **Project_Technologies** - Many-to-many relationship
-- **Contributors** - Project contributors
-- **Project_Contributors** - Many-to-many relationship
-- **Project_Images** - Project image gallery
-- **Admin_Activities** - Activity logging
+- **projects** - Main project information
+- **technologies** - Available technologies
+- **project_technologies** - Many-to-many relationship
+- **contributors** - Project contributors
+- **project_contributors** - Many-to-many relationship
+- **project_images** - Project image gallery
+- **admins** - Admin users
 
 See [projectbrief.md](memory-bank/projectbrief.md) for detailed schema.
 
@@ -279,24 +325,26 @@ See [projectbrief.md](memory-bank/projectbrief.md) for detailed schema.
 
 ## 🔐 Security
 
-- **Authentication:** JWT-based (access + refresh tokens)
+- **Authentication:** JWT-based (30min access + 7day refresh tokens)
+- **Auto-refresh:** Automatic token refresh on expiry
 - **Password Hashing:** bcrypt with salt rounds
-- **Input Validation:** Client-side (React Hook Form) + Server-side (Express Validator)
+- **Input Validation:** Client + Server-side validation
 - **SQL Injection:** Protected via Prisma ORM
 - **XSS Protection:** Helmet middleware
-- **CSRF Protection:** CSRF tokens
+- **CORS:** Configured for production
 - **Rate Limiting:** Express rate limit middleware
 - **HTTPS:** Required in production
 
 ---
 
-## 🎯 Performance Targets
+## 🎯 Performance
 
-- **First Contentful Paint:** < 1.5s
-- **Time to Interactive:** < 3.5s
-- **Lighthouse Score:** > 90 (all categories)
+- **First Contentful Paint:** < 1.5s (target)
+- **Time to Interactive:** < 3.5s (target)
+- **Lighthouse Score:** > 90 (target)
 - **API Response Time:** < 500ms
-- **Bundle Size:** Optimized with code splitting
+- **Bundle Size:** Optimized with Vite
+- **Code Splitting:** Automatic with React Router
 
 ---
 
@@ -324,7 +372,7 @@ Following Conventional Commits:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ---
 
@@ -341,21 +389,22 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - Design inspiration from modern portfolio websites
-- Tailwind CSS for the amazing utility-first framework
+- Tailwind CSS for the utility-first framework
 - Cloudinary for image management
-- Next.js team for the incredible framework
+- Vite team for the blazing fast build tool
 - Prisma team for the elegant ORM
+- React Query for server state management
 
 ---
 
 ## 📞 Support
 
-If you have questions or need help with the project:
+If you have questions or need help:
 
 1. Check the [Memory Bank documentation](memory-bank/)
 2. Review the [progress tracker](memory-bank/progress.md)
-3. Open an issue on GitHub
-4. Contact the developer
+3. Check [TESTING.md](TESTING.md) for testing info
+4. Open an issue on GitHub
 
 ---
 
@@ -365,5 +414,6 @@ If you have questions or need help with the project:
 
 *Modern. Professional. Scalable.*
 
-</div>
+**249 Tests Passing** | **92% Complete** | **Production Ready**
 
+</div>

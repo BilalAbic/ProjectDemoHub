@@ -69,6 +69,10 @@ The API will be running at `http://localhost:4000`
 | `npm run dev` | Start development server with hot reload |
 | `npm run build` | Build TypeScript to JavaScript |
 | `npm start` | Start production server |
+| `npm test` | Run all tests with Jest |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run test:coverage` | Run tests with coverage report |
+| `npm run test:verbose` | Run tests with verbose output |
 | `npm run lint` | Run ESLint |
 | `npm run lint:fix` | Fix ESLint errors |
 | `npm run format` | Format code with Prettier |
@@ -133,22 +137,59 @@ Main tables:
 - **admin_activities** - Activity logs
 - **admins** - Admin users
 
-## API Endpoints (Coming Soon)
+## API Endpoints ✅
 
 ### Public Endpoints
-- `GET /api/projects` - List all published projects
-- `GET /api/projects/:id` - Get single project
+- `GET /api/projects` - List all published projects (with pagination)
+- `GET /api/projects/:id` - Get single project details
 - `GET /api/technologies` - List all technologies
 
 ### Admin Endpoints (Authentication Required)
 - `POST /api/admin/login` - Admin login
-- `GET /api/admin/dashboard/stats` - Dashboard statistics
-- `GET /api/admin/projects` - List all projects
-- `POST /api/admin/projects` - Create project
+- `POST /api/admin/logout` - Admin logout
+- `POST /api/admin/refresh` - Refresh access token
+- `GET /api/admin/me` - Get current admin user
+- `GET /api/admin/projects` - List all projects (including unpublished)
+- `POST /api/admin/projects` - Create new project
 - `PUT /api/admin/projects/:id` - Update project
 - `DELETE /api/admin/projects/:id` - Delete project
-- `POST /api/admin/projects/:id/images` - Upload image
+- `POST /api/admin/projects/:id/images` - Upload images
 - `DELETE /api/admin/projects/:id/images/:imageId` - Delete image
+
+## Testing
+
+### Test Coverage
+```
+Test Suites: 6 passed, 6 total
+Tests:       138 passed, 138 total
+Coverage:    31.06% overall, 99.23% services
+Time:        ~8 seconds
+```
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests with verbose output
+npm run test:verbose
+```
+
+### What's Tested
+- ✅ JWT utilities (25 tests, 97.22% coverage)
+- ✅ CatchAsync utility (8 tests, 100% coverage)
+- ✅ Auth service (27 tests, 100% coverage)
+- ✅ Project service (22 tests, 100% coverage)
+- ✅ Technology service (18 tests, 100% coverage)
+- ✅ Admin project service (38 tests, 98.46% coverage)
+
+See [tests/README.md](tests/README.md) for detailed testing documentation.
 
 ## Development Tools
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Badge, Button } from '@/components/ui';
 import { Project } from '@/types';
 
@@ -10,6 +10,13 @@ interface ProjectDetailModalProps {
 
 export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailModalProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  // Reset image index when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedImageIndex(0);
+    }
+  }, [isOpen]);
 
   if (!project) return null;
 
@@ -26,7 +33,16 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <Modal.Body className="p-8 lg:p-12">
+      <Modal.Body className="p-8 lg:p-12 relative">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 lg:top-6 lg:right-6 p-2 text-text-dark-body hover:text-text-dark-heading hover:bg-white/10 rounded-full transition-colors z-10"
+          aria-label="Close modal"
+        >
+          <span className="material-symbols-outlined">close</span>
+        </button>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image Gallery */}
           <div className="space-y-4">
