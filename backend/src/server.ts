@@ -1,5 +1,14 @@
 import express, { Application } from 'express';
 import dotenv from 'dotenv';
+
+// Load environment variables FIRST
+dotenv.config();
+
+// Map Azure Container Apps env vars (kebab-case) to app format (UPPER_SNAKE_CASE)
+// MUST be imported before any other modules that use env vars
+import '@/config/env';
+
+// Now import other modules (after env is configured)
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -10,12 +19,6 @@ import projectRoutes from '@/routes/projectRoutes';
 import technologyRoutes from '@/routes/technologyRoutes';
 import authRoutes from '@/routes/authRoutes';
 import adminProjectRoutes from '@/routes/adminProjectRoutes';
-
-// Load environment variables
-dotenv.config();
-
-// Map Azure Container Apps env vars (kebab-case) to app format (UPPER_SNAKE_CASE)
-import '@/config/env';
 
 // Create Express app
 const app: Application = express();

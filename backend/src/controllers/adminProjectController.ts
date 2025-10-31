@@ -35,11 +35,11 @@ export const createProject = async (req: Request, res: Response) => {
     console.log('📥 Create Project Request:');
     console.log('Body:', req.body);
     console.log('Files:', req.files);
-    
+
     // Parse form data - handle both FormData and JSON
     let name, description, startDate, endDate, demoUrl, githubUrl, isPublished;
     let technologyIds: any[] = [];
-    
+
     // Extract basic fields
     name = req.body.name;
     description = req.body.description;
@@ -48,11 +48,11 @@ export const createProject = async (req: Request, res: Response) => {
     demoUrl = req.body.demoUrl || req.body.demo_url;
     githubUrl = req.body.githubUrl || req.body.github_url;
     isPublished = req.body.isPublished === 'true' || req.body.isPublished === true || req.body.is_published === true;
-    
+
     // Handle technology IDs - FormData sends as 'technologyIds[]'
     if (req.body['technologyIds[]']) {
       // If it's an array, use it directly
-      technologyIds = Array.isArray(req.body['technologyIds[]']) 
+      technologyIds = Array.isArray(req.body['technologyIds[]'])
         ? req.body['technologyIds[]']
         : [req.body['technologyIds[]']]; // Single value, wrap in array
     } else if (req.body.technologyIds) {
@@ -68,19 +68,19 @@ export const createProject = async (req: Request, res: Response) => {
     } else {
       technologyIds = [];
     }
-    
+
     // Debug: Log parsed technology IDs
     console.log('🔍 Parsed technologyIds:', technologyIds);
     console.log('🔍 Is array?', Array.isArray(technologyIds));
     console.log('🔍 First element:', technologyIds[0]);
     console.log('🔍 First element type:', typeof technologyIds[0]);
-    
+
     // CRITICAL FIX: Flatten array if nested (Multer sometimes creates nested arrays)
     if (technologyIds.length > 0 && Array.isArray(technologyIds[0])) {
       console.log('⚠️ Nested array detected, flattening...');
       technologyIds = technologyIds.flat();
     }
-    
+
     // Ensure all elements are strings
     technologyIds = technologyIds.filter((id: any) => id && typeof id === 'string');
     console.log('✅ Final technologyIds:', technologyIds);
@@ -124,14 +124,14 @@ export const createProject = async (req: Request, res: Response) => {
     // Get uploaded files from Multer/Cloudinary (if any)
     // Files are already uploaded to Cloudinary by multer-storage-cloudinary
     const files = req.files as any[] | undefined;
-    
+
     // Transform Cloudinary files to our image format
     const images = files
       ? files.map((file, index) => ({
-          imageUrl: file.path, // Cloudinary URL
-          publicId: file.filename, // Cloudinary public_id
-          displayOrder: index,
-        }))
+        imageUrl: file.path, // Cloudinary URL
+        publicId: file.filename, // Cloudinary public_id
+        displayOrder: index,
+      }))
       : [];
 
     // Create project with images
@@ -172,15 +172,15 @@ export const createProject = async (req: Request, res: Response) => {
 export const updateProject = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    
+
     // Debug: Log incoming request
     console.log('📥 Update Project Request:');
     console.log('Body:', req.body);
-    
+
     // Parse form data - handle both FormData (camelCase) and JSON (snake_case)
     let name, description, startDate, endDate, demoUrl, githubUrl, isPublished;
     let technologyIds: any[] = [];
-    
+
     // Extract basic fields (support both camelCase from FormData and snake_case)
     name = req.body.name;
     description = req.body.description;
@@ -188,17 +188,17 @@ export const updateProject = async (req: Request, res: Response) => {
     endDate = req.body.endDate || req.body.end_date;
     demoUrl = req.body.demoUrl || req.body.demo_url;
     githubUrl = req.body.githubUrl || req.body.github_url;
-    
+
     // Parse isPublished (handle string 'true'/'false' from FormData)
     if (req.body.isPublished !== undefined) {
       isPublished = req.body.isPublished === 'true' || req.body.isPublished === true;
     } else if (req.body.is_published !== undefined) {
       isPublished = req.body.is_published === 'true' || req.body.is_published === true;
     }
-    
+
     // Handle technology IDs - FormData sends as 'technologyIds[]'
     if (req.body['technologyIds[]']) {
-      technologyIds = Array.isArray(req.body['technologyIds[]']) 
+      technologyIds = Array.isArray(req.body['technologyIds[]'])
         ? req.body['technologyIds[]']
         : [req.body['technologyIds[]']];
     } else if (req.body.technologyIds) {
@@ -210,13 +210,13 @@ export const updateProject = async (req: Request, res: Response) => {
         ? req.body.technologies
         : req.body.technologies;
     }
-    
+
     // Flatten and filter technology IDs
     if (technologyIds.length > 0 && Array.isArray(technologyIds[0])) {
       technologyIds = technologyIds.flat();
     }
     technologyIds = technologyIds.filter((id: any) => id && typeof id === 'string');
-    
+
     console.log('✅ Parsed update data:', { name, description, startDate, endDate, demoUrl, githubUrl, isPublished, technologyIds });
     console.log('📊 Data types:', {
       nameType: typeof name,
@@ -242,7 +242,7 @@ export const updateProject = async (req: Request, res: Response) => {
     const updateData: any = {};
     if (name !== undefined) updateData.name = name;
     if (description !== undefined) updateData.description = description;
-    
+
     // Parse and validate dates
     if (startDate !== undefined) {
       const parsedStartDate = new Date(startDate);
@@ -257,7 +257,7 @@ export const updateProject = async (req: Request, res: Response) => {
       }
       updateData.startDate = parsedStartDate;
     }
-    
+
     if (endDate !== undefined) {
       if (endDate === null || endDate === '' || endDate === 'null') {
         updateData.endDate = null;
@@ -275,7 +275,7 @@ export const updateProject = async (req: Request, res: Response) => {
         updateData.endDate = parsedEndDate;
       }
     }
-    
+
     if (demoUrl !== undefined) updateData.demoUrl = demoUrl || null;
     if (githubUrl !== undefined) updateData.githubUrl = githubUrl || null;
     if (isPublished !== undefined) updateData.isPublished = isPublished;
