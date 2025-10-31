@@ -229,7 +229,7 @@ npm run test:ui               # With UI
 npm run test:coverage         # With coverage report
 ```
 
-**📝 For detailed setup instructions, see [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md)**
+**📝 For detailed setup instructions, see [backend/README.md](backend/README.md) and [frontend/README.md](frontend/README.md)**
 
 ---
 
@@ -238,7 +238,7 @@ npm run test:coverage         # With coverage report
 ### Main Documentation
 - **[README.md](README.md)** - This file (project overview)
 - **[TESTING.md](TESTING.md)** - Testing guide (249 tests)
-- **[SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md)** - Setup guide
+- **[DEPLOYMENT_COMPLETE.md](DEPLOYMENT_COMPLETE.md)** - Production deployment guide
 
 ### Memory Bank (Project Context)
 1. **[projectbrief.md](memory-bank/projectbrief.md)** - Requirements & objectives

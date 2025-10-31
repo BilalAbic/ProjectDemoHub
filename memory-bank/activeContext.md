@@ -274,12 +274,13 @@ Complete full-stack application with comprehensive backend testing! All critical
 - ✅ `progress.md` - Progress tracking
 
 ### Design References Analyzed
-- ✅ HomePage design and HTML structure reviewed
-- ✅ ProjectComponent modal design analyzed
-- ✅ AdminHome dashboard layout studied
-- ✅ AdminProjects management page examined
-- ✅ AdminProjectNewComponent modal form reviewed
-- ✅ AdminProjectEditComponent editing interface analyzed
+All design files are located in the `designs/` folder:
+- ✅ `designs/HomePage/` - HTML structure and layout reviewed
+- ✅ `designs/ProjectComponent/` - Modal design analyzed
+- ✅ `designs/AdminHome/` - Dashboard layout studied
+- ✅ `designs/AdminProjects/` - Management page examined
+- ✅ `designs/AdminProjectNewComponent/` - Modal form reviewed
+- ✅ `designs/AdminProjectEditComponent/` - Editing interface analyzed
 
 ## Next Steps
 

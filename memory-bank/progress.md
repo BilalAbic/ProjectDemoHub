@@ -38,15 +38,17 @@ Deployment               ██████████████████�
   - `techContext.md` - Technology stack, dependencies, setup instructions
   - `activeContext.md` - Current work focus, decisions, learnings
   - `progress.md` - This file, tracking what's done and what's left
-- ✅ **Setup Instructions**: Detailed step-by-step guide (SETUP_INSTRUCTIONS.md)
+- ✅ **Setup Instructions**: Detailed in backend/README.md and frontend/README.md
 - ✅ **Backend README**: Complete backend documentation with all commands
 
 ### Design References
-- ✅ **All design references analyzed**:
-  - HomePage design (public project gallery)
-  - ProjectComponent design (project detail modal)
-  - AdminHome design (dashboard)
-  - AdminProjects design (project management table)
+- ✅ **All design references analyzed** (located in `designs/` folder):
+  - `designs/HomePage/` - Public project gallery design
+  - `designs/ProjectComponent/` - Project detail modal design
+  - `designs/AdminHome/` - Dashboard design
+  - `designs/AdminProjects/` - Project management table design
+  - `designs/AdminProjectNewComponent/` - Add project modal design
+  - `designs/AdminProjectEditComponent/` - Edit project modal design
   - AdminProjectNewComponent design (add project modal)
   - AdminProjectEditComponent design (edit project modal)
 
@@ -221,7 +223,7 @@ Deployment               ██████████████████�
 - ✅ Create .env.example file for backend
 - ✅ Write initial README.md with setup instructions
 - ✅ Create backend .gitignore
-- ✅ Create SETUP_INSTRUCTIONS.md guide
+- ✅ Create setup guides in backend/README.md and frontend/README.md
 - ✅ Install all dependencies (npm install)
 - ✅ Start Docker containers (PostgreSQL running)
 - ✅ Run Prisma migrations (schema applied)
