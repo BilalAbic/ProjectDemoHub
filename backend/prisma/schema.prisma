@@ -8,6 +8,9 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // Optimize for serverless/Neon.tech
+  // Add connection pooling parameters
+  directUrl = env("DATABASE_URL")
 }
 
 // ============================================

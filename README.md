@@ -195,7 +195,7 @@ Docker Desktop (recommended)
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/bilalabic/demohub.git
+git clone https://github.com/BilalAbic/ProjectDemoHub.git
 cd demohub
 
 # 2. Backend setup

@@ -15,6 +15,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from '@/middlewares/errorHandler';
 import { notFoundHandler } from '@/middlewares/notFoundHandler';
+import { startKeepAlive } from '@/middlewares/keepAlive';
 import projectRoutes from '@/routes/projectRoutes';
 import technologyRoutes from '@/routes/technologyRoutes';
 import authRoutes from '@/routes/authRoutes';
@@ -94,6 +95,9 @@ const startServer = () => {
     console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔗 Health check: http://localhost:${PORT}/health`);
     console.log('=================================');
+    
+    // Start database keep-alive to prevent Neon.tech idle disconnects
+    startKeepAlive();
   });
 };
 

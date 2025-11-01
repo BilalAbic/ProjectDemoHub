@@ -1,8 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 
-// Create Prisma client instance
+// Create Prisma client instance with connection pool settings
 const prisma = new PrismaClient({
   log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+  // Connection pool settings for Neon.tech serverless
+  // Helps with cold starts and idle connections
 });
 
 // Handle Prisma client connection

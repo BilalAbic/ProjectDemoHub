@@ -195,7 +195,7 @@
 ## 📞 Support
 
 - **Live Site:** https://demohub.bilalabic.com
-- **GitHub:** https://github.com/bilalabic/demohub
+- **GitHub:** https://github.com/BilalAbic/ProjectDemoHub
 - **Email:** bilal@demohub.com
 
 ---
